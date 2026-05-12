@@ -1,3 +1,4 @@
+<img width="1376" height="768" alt="banner" src="https://github.com/user-attachments/assets/5e492321-721e-4794-bcf0-d18c41bca537" />
 # The Manifestation Manifesto: Truth Through Accessibility
 
 > "A vision brought to light is the result of intent, guided by math, and made possible through mercy."
@@ -31,46 +32,44 @@ from PIL import Image
 import time
 
 def run_prosthetic_truth(user_seed, steps=30):
-    """
-    PROSTHETIC PROOF:
-    Manifests a clear vision by guiding noise toward intent.
-    Shows the math is a servant to the creator's mind.
-    """
-    start_time = time.perf_counter() # Precise timing
+    start_time = time.perf_counter()
     np.random.seed(user_seed)
     
-    # 1. THE START (Gaussian Noise/Chaos)
-    # 100% random static. Zero information.
+    # 1. Starting Chaos
     canvas = np.random.normal(128, 64, (256, 256, 3))
     
-    # 2. THE VISION (The Intent/Truth)
-    # A sunset gradient (Red top to Black bottom).
+    # Capture initial data points
+    initial_top_left = canvas[0, 0].copy()
+    initial_bottom_right = canvas[255, 255].copy()
+    
+    # 2. Vision Intent (Red to Black)
     intent = np.zeros((256, 256, 3))
     for y in range(256):
-        intent[y, :, 0] = 255 - y # Red fading out
+        intent[y, :, 0] = 255 - y
         
-    # 3. THE MANIFESTATION (Scheduled Denoising)
-    # More steps = higher clarity and less noise.
+    # 3. Iterative Manifestation
     for i in range(1, steps + 1):
-        # Calculation: sliding from noise toward vision
         t = i / steps
         canvas = (canvas * (1 - t)) + (intent * t)
         
-    # Converting the final numbers back into an image
-    final_img = Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8))
+    duration = (time.perf_counter() - start_time) * 1000
     
-    end_time = time.perf_counter()
-    duration = (end_time - start_time) * 1000 # Convert to ms
+    # Capture final data points
+    final_top_left = canvas[0, 0]
+    final_bottom_right = canvas[255, 255]
     
-    print(f"\n[SUCCESS] Manifestation complete in {duration:.2f}ms.")
-    print(f"Calculated from Noise (Seed: {user_seed}) over {steps} steps.")
-    return final_img
+    print(f"--- EXECUTION LOG ---")
+    print(f"Time: {duration:.2f}ms | Steps: {steps} | Seed: {user_seed}")
+    print(f"Top-Left Pixel (Start Chaos): {initial_top_left.astype(int)}")
+    print(f"Top-Left Pixel (Final Vision): {final_top_left.astype(int)}")
+    print(f"Bottom-Right Pixel (Start Chaos): {initial_bottom_right.astype(int)}")
+    print(f"Bottom-Right Pixel (Final Vision): {final_bottom_right.astype(int)}")
+    print(f"---------------------")
+    
+    return Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8))
 
-# --- EXECUTION ---
 image = run_prosthetic_truth(user_seed=1234, steps=30)
-image.save("clean_truth.png")
-print("Check your folder for 'clean_truth.png' — the quiet certainty of math.")
-
+image.save('final_manifested_truth.png')
 ```
 
 ---
