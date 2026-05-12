@@ -29,23 +29,32 @@ This script is designed for **Pydroid 3** or any Python environment. It provides
 import numpy as np
 from PIL import Image
 
+
 def manifest_truth(user_seed, mode="prosthetic"):
     # 1. Starting from Chaos (Gaussian Noise)
     np.random.seed(user_seed)
     canvas = np.random.normal(128, 60, (256, 256, 3))
-    
+
     # 2. Defining Intent (Mathematical Weights)
     intent = np.zeros((256, 256, 3))
     for y in range(256):
-        intent[y, :, 0] = 255 - y # Sunset/Vision Logic
-        
+        intent[y, :, 0] = 255 - y  # Sunset/Vision Logic
+
     # 3. The Manifestation (Iterative Denoising)
     for step in range(1, 6):
         canvas = (canvas * 0.7) + (intent * 0.3)
-        
+
+    # Converting the math back into a visible image
     return Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8))
 
-print("Manifestation Complete. The math has revealed the vision.")
+
+# --- THE MISSING PIECE: EXECUTION ---
+# Change the seed to show that every random start creates a unique result.
+image = manifest_truth(user_seed=1234)
+image.save("manifested_truth.png")
+
+print("Manifestation Complete. Check your folder for 'manifested_truth.png'.")
+print("The math has revealed the vision.")
 ```
 
 ---
