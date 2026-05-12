@@ -3,6 +3,8 @@
 
 > "A vision brought to light is the result of intent, guided by math, and made possible through mercy."
 
+DominusX | Developer & Truth-Seeker
+
 ## 📜 The Manifesto
 
 ### 1. The Pillar of Objective Truth
@@ -78,3 +80,9 @@ image.save('final_manifested_truth.png')
 1. **Run the Code**: Use the provided script to see how intent guides noise.
 2. **Read the Logic**: Understand that VRAM usage and local execution prove there is no "secret database."
 3. **Engage with Empathy**: Remember that for many, this is a tool of accessibility, not a tool of replacement.
+
+
+
+As a Python developer and a Muslim, my work is a witness to the Definitive Truth. Living with Rheumatoid Arthritis since age two, I have reclaimed my creative voice through technology, using code as a digital prosthetic to bridge the physical gap between mind and manifestation.
+This repository is my archived legacy: a proof that beauty is a calculation of intent, not a collection of scraps. I leave behind this Logic and Mercy suite to stand against the noise of misinformation—a permanent reminder that while hands may falter, the spirit, guided by truth, is ever-prevailing.
+"جاء الحق وزهق الباطل — Truth has come, and falsehood has perished."
