@@ -28,33 +28,49 @@ This script is designed for **Pydroid 3** or any Python environment. It provides
 ```python
 import numpy as np
 from PIL import Image
+import time
 
-
-def manifest_truth(user_seed, mode="prosthetic"):
-    # 1. Starting from Chaos (Gaussian Noise)
+def run_prosthetic_truth(user_seed, steps=30):
+    """
+    PROSTHETIC PROOF:
+    Manifests a clear vision by guiding noise toward intent.
+    Shows the math is a servant to the creator's mind.
+    """
+    start_time = time.perf_counter() # Precise timing
     np.random.seed(user_seed)
-    canvas = np.random.normal(128, 60, (256, 256, 3))
-
-    # 2. Defining Intent (Mathematical Weights)
+    
+    # 1. THE START (Gaussian Noise/Chaos)
+    # 100% random static. Zero information.
+    canvas = np.random.normal(128, 64, (256, 256, 3))
+    
+    # 2. THE VISION (The Intent/Truth)
+    # A sunset gradient (Red top to Black bottom).
     intent = np.zeros((256, 256, 3))
     for y in range(256):
-        intent[y, :, 0] = 255 - y  # Sunset/Vision Logic
+        intent[y, :, 0] = 255 - y # Red fading out
+        
+    # 3. THE MANIFESTATION (Scheduled Denoising)
+    # More steps = higher clarity and less noise.
+    for i in range(1, steps + 1):
+        # Calculation: sliding from noise toward vision
+        t = i / steps
+        canvas = (canvas * (1 - t)) + (intent * t)
+        
+    # Converting the final numbers back into an image
+    final_img = Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8))
+    
+    end_time = time.perf_counter()
+    duration = (end_time - start_time) * 1000 # Convert to ms
+    
+    print(f"\n[SUCCESS] Manifestation complete in {duration:.2f}ms.")
+    print(f"Calculated from Noise (Seed: {user_seed}) over {steps} steps.")
+    return final_img
 
-    # 3. The Manifestation (Iterative Denoising)
-    for step in range(1, 6):
-        canvas = (canvas * 0.7) + (intent * 0.3)
+# --- EXECUTION ---
+image = run_prosthetic_truth(user_seed=1234, steps=30)
+image.save("clean_truth.png")
+print("Check your folder for 'clean_truth.png' — the quiet certainty of math.")
 
-    # Converting the math back into a visible image
-    return Image.fromarray(np.clip(canvas, 0, 255).astype(np.uint8))
-
-
-# --- THE MISSING PIECE: EXECUTION ---
-# Change the seed to show that every random start creates a unique result.
-image = manifest_truth(user_seed=1234)
-image.save("manifested_truth.png")
-
-print("Manifestation Complete. Check your folder for 'manifested_truth.png'.")
-print("The math has revealed the vision.")
 ```
 
 ---
